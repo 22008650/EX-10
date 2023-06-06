@@ -22,94 +22,59 @@ To write a python program for creating File Transfer using TCP Sockets Links.
 ## client:
 ## Developed : MALARVIZHI G
 ## Reg no : 212222040096
-
+```
 import socket
-
 s = socket.socket()
-
 host = socket.gethostname()
-
 port = 60000
-
 s.connect((host, port))
-
 s.send("Hello server!".encode())
-
 with open('received_file', 'wb') as f:
-
-    while True:
-    
-        print('receiving data...')
-        
-        data = s.recv(1024)
-        
-        print('data=%s', (data))
-        
+    while True:    
+        print('receiving data...')        
+        data = s.recv(1024)        
+        print('data=%s', (data))        
         if not data:
-        
-            break
-            
-        f.write(data)
-        
+        break            
+        f.write(data)        
 f.close()
-
 print('Successfully get the file')
-
 s.close()
-
 print('connection closed')
+```
 
 ## SERVER:
+```
 import socket
-
 port = 60000
-
 s = socket.socket()
-
 host = socket.gethostname()
-
 s.bind((host, port))
-
 s.listen(5)
-
 while True:
-
     conn, addr = s.accept()
-    
-    data = conn.recv(1024)
-    
-    print('Server received', repr(data))
-    
-    filename='mytext.txt'
-    
-    f = open(filename,'rb')
-    
-    l = f.read(1024)
-    
-    while (l):
-    
-        conn.send(l)
-        
-        print('Sent ',repr(l))
-        
-        l = f.read(1024)
-        
-    f.close()
-    
-    print('Done sending')
-    
+    data = conn.recv(1024)    
+    print('Server received', repr(data))    
+    filename='mytext.txt'    
+    f = open(filename,'rb')    
+    l = f.read(1024)    
+    while (l):    
+        conn.send(l)        
+        print('Sent ',repr(l))        
+        l = f.read(1024)        
+    f.close()    
+    print('Done sending')    
     conn.send('Thank you for connecting'.encode())
-    
     conn.close()
-
+```
 
 
 
 ## OUTPUT :
 ## CLIENT:
-![EX 10 CLIENT](https://github.com/22008650/EX-10/assets/122548204/58877f5b-f1ea-465c-a781-e2838dafc977)
+![ex10 client output](https://github.com/22008650/EX-10/assets/122548204/00053adb-95c6-4f6b-a4df-efaa3bdce3f4)
 ## SERVER:
-![EX 10 SERVER](https://github.com/22008650/EX-10/assets/122548204/7178055a-7243-4ddb-9fb4-7ac36497a9a4)
+![ex10 server output](https://github.com/22008650/EX-10/assets/122548204/419e43a0-1717-4c70-9b23-aed2becb7b4d)
 
 
 
